@@ -1,5 +1,6 @@
 # coding=utf8
-from thrift_files.water import Water
+from thrift_files.bps import Bps
+
 # from thrift_files.ttypes import SystemException
 from thrift.transport import TSocket
 from thrift.transport import TTransport
@@ -10,7 +11,7 @@ from dispatcher import Dispatcher
 
 def start(newcls):
     dispatcher = newcls()
-    processor = Water.Processor(dispatcher)
+    processor = Bps.Processor(dispatcher)
     transport = TSocket.TServerSocket(port=9090)
     tfactory = TTransport.TBufferedTransportFactory()
     pfactory = TBinaryProtocol.TBinaryProtocolFactory()

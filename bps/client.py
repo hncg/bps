@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from thrift_files.water import Water
+from thrift_files.bps import Bps
 
 from thrift import Thrift
 from thrift.transport import TSocket
@@ -19,7 +19,7 @@ def main():
     protocol = TBinaryProtocol.TBinaryProtocol(transport)
 
     # Create a client to use the protocol encoder
-    client = Water.Client(protocol)
+    client = Bps.Client(protocol)
 
     # Connect!
     transport.open()
