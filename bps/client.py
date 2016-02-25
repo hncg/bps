@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# coding=utf8
 
 from thrift_files.bps import Bps
 
@@ -25,7 +25,8 @@ def main():
     transport.open()
 
     print client.ping()
-
+    result = client.mget_blog()
+    print result
     # Close!
     transport.close()
 

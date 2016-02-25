@@ -17,5 +17,7 @@ def serialize_to(obj, tobj):
         value = getattr(obj, k)
         if isinstance(value, datetime):
             value = datetime2utc(value)
+        if isinstance(value, unicode):
+            value = value.encode('utf8')
         setattr(tobj, k, value)
     return tobj

@@ -1,3 +1,5 @@
+namespace php bps
+
 typedef i64 timesteamp
 
 struct Blog {
@@ -5,7 +7,7 @@ struct Blog {
   2: string content,
   3: timesteamp time,
   4: string author,
-  5: string title,
+  5: string title
 }
 
 
@@ -15,7 +17,7 @@ struct Comment {
   3: i32 user_id,
   4: string content,
   5: timesteamp time_at,
-  7: string user_niker,
+  7: string user_niker
 }
 
 
