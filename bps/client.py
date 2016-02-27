@@ -25,8 +25,7 @@ def main():
     transport.open()
 
     print client.ping()
-    result = client.mget_blog()
-    print result
+    print client.mget_comment()
     # Close!
     transport.close()
 

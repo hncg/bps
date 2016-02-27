@@ -2,7 +2,7 @@ namespace php bps
 
 typedef i64 timesteamp
 
-struct Blog {
+struct Article {
   1: i32 id,
   2: string content,
   3: timesteamp time,
@@ -29,7 +29,9 @@ exception SystemException {
 service Bps {
     i16 ping() throws (1:SystemException SysException),
 
-    list <Blog> mget_blog() throws (1:SystemException SysException)
+    list <Article> mget_blog() throws (1:SystemException SysException)
 
     list <Comment> mget_comment() throws (1:SystemException SysException)
+
+    map <i64, list <Comment>> get_comment_map_by_parent_ids(1:list<i32> parent_ids) throws (1:SystemException SysException)
 }

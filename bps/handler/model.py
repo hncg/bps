@@ -4,6 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import SQLAlchemyError
 from handler import DBSession
 
+from cg_core.utils import serialize_to
+from thrift_files.bps import ttypes
+
 Base = declarative_base()
 session = DBSession()
 
@@ -31,7 +34,10 @@ class Article(Base):
 
     @classmethod
     def mget(cls, offset=0, limit=10):
-        return DBSession().query(cls).all()
+        return session.query(cls).all()
+
+    def serialize(self):
+        return serialize_to(self, ttypes.Article)
 
 
 class Comment(Base):
@@ -46,4 +52,11 @@ class Comment(Base):
 
     @classmethod
     def mget(cls, offset=0, limit=10):
-        return DBSession().query(cls).all()
+        return session.query(cls).all()
+
+    @classmethod
+    def mget_by_parent_ids(cls, parent_ids=[]):
+        return session.query(cls).filter(cls.parent_id.in_(parent_ids)).all() # noqa
+
+    def serialize(self):
+        return serialize_to(self, ttypes.Comment)
