@@ -20,12 +20,12 @@ def main():
 
     # Create a client to use the protocol encoder
     client = Bps.Client(protocol)
-
     # Connect!
     transport.open()
 
-    print client.ping()
-    print client.mget_comment()
+    # print client.ping()
+    print client.login_user('admin', '21232f297a57a5a743894a0e4a801fc3')
+    print client.get_user(1)
     # Close!
     transport.close()
 

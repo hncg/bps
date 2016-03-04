@@ -1,5 +1,6 @@
 # coding=utf8
 from handler.model import Comment
+from cg_core import utils
 
 
 def mget():
@@ -20,3 +21,13 @@ def mget_map_by_parent_ids(ids=[]):
         else:
             comments_list[comment.parent_id] = [comment.serialize()]
     return comments_list
+
+
+def add(comment_arg):
+    return Comment.add(
+        user_id=comment_arg.user_id,
+        parent_id=comment_arg.parent_id,
+        content=comment_arg.content,
+        time_at=utils.utc2datetime(comment_arg.time_at),
+        user_niker=comment_arg.user_niker,
+    )

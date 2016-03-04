@@ -3,10 +3,12 @@ thrift_dir:
 	mkdir -p thrift_files
 
 build:thrift_dir
-	sudo apt-get install libmysqlclient-dev &&\
-	sudo pip install MySQL-python &&\
 	cd bps &&\
 	thrift --gen py -out thrift_files bps.thrift
+
+install:
+	sudo apt-get install libmysqlclient-dev &&\
+	sudo pip install MySQL-python
 
 start:
 	cd bps &&\
