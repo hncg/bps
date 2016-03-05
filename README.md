@@ -12,7 +12,7 @@
 
 ### 使用姿势
 
-#### 项目构建 1. build
+#### 项目依赖安装 1. install
 
     make install
 

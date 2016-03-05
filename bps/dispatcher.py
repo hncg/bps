@@ -32,3 +32,9 @@ class Dispatcher(object):
 
     def add_comment(self, comment_arg):
         return comment.add(comment_arg)
+
+    def get_user_by_openid(self, openid):
+        return user.get_by_openid(openid)
+
+    def register_user(self, user_arg):
+        return user.register(user_arg)

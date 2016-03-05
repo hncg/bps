@@ -24,8 +24,7 @@ def main():
     transport.open()
 
     # print client.ping()
-    print client.login_user('admin', '21232f297a57a5a743894a0e4a801fc3')
-    print client.get_user(1)
+    print client.get_user_by_openid('asa')
     # Close!
     transport.close()
 

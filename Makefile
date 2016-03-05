@@ -9,6 +9,7 @@ build:thrift_dir
 install:
 	sudo apt-get install libmysqlclient-dev &&\
 	sudo pip install MySQL-python
+	sudo pip install sqlalchemy
 
 start:
 	cd bps &&\

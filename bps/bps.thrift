@@ -38,7 +38,9 @@ struct User {
   7: string last_ip,
   8: timesteamp last_time,
   9: i32 is_lock,
-  10: string device
+  10: string device,
+  11: string openid,
+  12: string gender
 }
 
 exception SystemException {
@@ -62,9 +64,13 @@ service Bps {
 
     void add(1:Article article) throws (1:SystemException SysException),
 
-    User get_user(1:i32 user_id) throws (1:SystemException SysException, 2:UserException Userexception)
+    User get_user(1:i32 user_id) throws (1:SystemException SysException, 2:UserException Userexception),
 
-    User login_user(1:string username, 2:string passwd) throws (1:SystemException SysException, 2:UserException Userexception)
+    User login_user(1:string username, 2:string passwd) throws (1:SystemException SysException, 2:UserException Userexception),
 
-    void add_comment(1:Comment comment) throws (1:SystemException SysException, 2:UserException Userexception)
+    void add_comment(1:Comment comment) throws (1:SystemException SysException, 2:UserException Userexception),
+
+    User get_user_by_openid(1:string openid) throws (1:SystemException SysException, 2:UserException Userexception),
+
+    i32 register_user(1:User user) throws (1:SystemException SysException, 2:UserException Userexception)
 }
