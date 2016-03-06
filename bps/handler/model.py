@@ -39,7 +39,8 @@ class Article(Base):
 
     @classmethod
     def mget(cls, query):
-        return session.query(cls).offset(query.offset).limit(query.limit).all()
+        return session.query(cls).order_by(cls.time.desc()). \
+            offset(query.offset).limit(query.limit).all()
 
     @classmethod
     def add(cls, **kwds):
