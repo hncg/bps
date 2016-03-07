@@ -23,3 +23,5 @@
 #### 测试 3. ping
 
     make ping
+
+ps: 之后整理一下之后会再加上 requirements.txt
