@@ -12,18 +12,17 @@ from thrift_files.bps import ttypes
 import time
 
 Base = declarative_base()
-session = DBSession()
 
 
-def session_commit():
-    try:
-        session.flush()
-        session.commit()
-    except SQLAlchemyError:
-        session.rollback()
-        raise(SQLAlchemyError)
-    finally:
-        session.close()
+# def session_commit():
+#     try:
+#         session.flush()
+#         session.commit()
+#     except SQLAlchemyError:
+#         session.rollback()
+#         raise(SQLAlchemyError)
+#     finally:
+#         session.close()
 
 
 class Article(Base):
@@ -39,14 +38,16 @@ class Article(Base):
 
     @classmethod
     def mget(cls, query):
-        return session.query(cls).order_by(cls.time.desc()). \
+        session = DBSession()
+        result = session.query(cls).order_by(cls.time.desc()). \
             offset(query.offset).limit(query.limit).all()
+        session.close()
+        return result
 
     @classmethod
     def add(cls, **kwds):
         session = DBSession()
         session.add(cls(**kwds))
-        session_commit()
         try:
             session.flush()
             session.commit()
@@ -74,17 +75,22 @@ class Comment(Base):
 
     @classmethod
     def mget(cls, offset=0, limit=10):
-        return session.query(cls).all()
+        session = DBSession()
+        result = session.query(cls).all()
+        session.close()
+        return result
 
     @classmethod
     def mget_by_parent_ids(cls, parent_ids=[]):
-        return session.query(cls).filter(cls.parent_id.in_(parent_ids)).all() # noqa
+        session = DBSession()
+        result = session.query(cls).filter(cls.parent_id.in_(parent_ids)).all()
+        session.close()
+        return result
 
     @classmethod
     def add(cls, **kwds):
         session = DBSession()
         session.add(cls(**kwds))
-        session_commit()
         try:
             session.flush()
             session.commit()
@@ -118,26 +124,31 @@ class User(Base):
 
     @classmethod
     def get(cls, id):
+        session = DBSession()
         result = session.query(cls).filter(cls.id == id).first()
         if not result:
             raise(ttypes.UserException(
                 code=1,
                 message='空'
             ))
+        session.close()
         return result
 
     @classmethod
     def get_by_openid(cls, openid):
+        session = DBSession()
         result = session.query(cls).filter(cls.openid == openid).first()
         if not result:
             raise(ttypes.UserException(
                 code=1,
                 message='空'
             ))
+        session.close()
         return result
 
     @classmethod
     def login(cls, username, passwd):
+        session = DBSession()
         result = session.query(cls).filter(cls.username == username and
                                            cls.password == passwd).first()
         if not result:
@@ -145,6 +156,7 @@ class User(Base):
                 code=1,
                 message='空'
             ))
+        session.close()
         return result
 
     @classmethod
@@ -152,7 +164,6 @@ class User(Base):
         session = DBSession()
         user = cls(**kwds)
         session.add(user)
-        session_commit()
         user_id = None
         try:
             session.flush()
