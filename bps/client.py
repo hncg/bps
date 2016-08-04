@@ -23,8 +23,8 @@ def main():
     # Connect!
     transport.open()
 
-    # print client.ping()
-    print client.get_user_by_openid('asa')
+    print client.ping()
+    # print client.get_user_by_openid('asa')
     # Close!
     transport.close()
 

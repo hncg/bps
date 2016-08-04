@@ -7,14 +7,12 @@ build:thrift_dir
 	thrift --gen py -out thrift_files bps.thrift
 
 install:
-	sudo apt-get install libmysqlclient-dev &&\
-	sudo pip install MySQL-python
-	sudo pip install sqlalchemy
+	mkdir -p  ~/.pip && cp pip.conf ~/.pip/ && pip install --trusted-host pypi.douban.com -r requirements.txt
 
 start:
 	cd bps &&\
 	python start_server.py
 
 ping:
-	@cd bps && \
+	cd bps && \
 	python client.py

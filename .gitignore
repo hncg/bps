@@ -1,2 +1,3 @@
 *.pyc
 thrift_files
+env.py
