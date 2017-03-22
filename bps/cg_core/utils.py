@@ -16,8 +16,8 @@ def serialize_to(obj, tobj):
     for k, v in tobj.__dict__.iteritems():
         value = getattr(obj, k)
         if isinstance(value, datetime):
-            value = datetime2utc(value)
+            value = int(datetime2utc(value))
         if isinstance(value, unicode):
-            value = value.encode('utf8')
+            pass
         setattr(tobj, k, value)
     return tobj

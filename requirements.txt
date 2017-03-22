@@ -1,2 +1,3 @@
 sqlalchemy==1.0.12
 MySQL-Python==1.2.5
+thrift==0.10.0
