@@ -1,6 +1,7 @@
 # coding=utf8
 
 from thrift_files.bps import Bps
+# from thrift_files.bps import ttypes
 
 from thrift import Thrift
 from thrift.transport import TSocket
@@ -24,6 +25,9 @@ def main():
     transport.open()
 
     print client.ping()
+    # print client.get_user(1)
+    # print client.mget_blog(ttypes.Query(user_id=1, limit=10, offset=1))
+    # print client.get_comment_map_by_parent_ids([1, 6])
     # print client.get_user_by_openid('asa')
     # Close!
     transport.close()
